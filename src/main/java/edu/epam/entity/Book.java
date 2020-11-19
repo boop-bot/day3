@@ -88,6 +88,34 @@ public class Book {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        if (publishYear != book.publishYear) return false;
+        if (pages != book.pages) return false;
+        if (price != book.price) return false;
+        if (!title.equals(book.title)) return false;
+        if (!author.equals(book.author)) return false;
+        if (!publishingHouse.equals(book.publishingHouse)) return false;
+        return bindingType.equals(book.bindingType);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title.hashCode();
+        result = 31 * result + author.hashCode();
+        result = 31 * result + publishingHouse.hashCode();
+        result = 31 * result + publishYear;
+        result = 31 * result + pages;
+        result = 31 * result + price;
+        result = 31 * result + bindingType.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Book{");
         sb.append("id = ").append(id).append(", title='").append(title).append('\'');
